@@ -1,7 +1,32 @@
+"""Print restaurant ratings.
+
+Reads restaurant names and ratings from a file supplied by a command line argument. Allows user to
+add restaurants, update ratings of existing restaurants, and update the ratings of a random
+argument.
+
+Gives user the option of printing an alphabetized list of the restaurants and their ratings to the
+console.
+"""
+
 import sys
 import random
 
 ratings = {}
+
+def titleize_name(name):
+    """Returns the titleized restaurant name.
+
+    Example:
+        titleized_name('the good restaurant')
+        >>> 'The Good Restaurant'
+    """
+
+    words = name.split()
+
+    for idx, word in enumerate(words):
+        words[idx] = word[0].upper() + word[1:]
+
+    return ' '.join(words)
 
 
 def get_ratings_from_file(ratings):
@@ -12,7 +37,7 @@ def get_ratings_from_file(ratings):
 
     for line in ratings_file:
         restaurant, rating = line.rstrip().split(":")
-        ratings[restaurant] = int(rating)
+        ratings[titleize_name(restaurant)] = int(rating)
 
 
 def print_restaurant_ratings(ratings):
