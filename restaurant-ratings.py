@@ -11,13 +11,14 @@ console.
 import sys
 import random
 
+
 ratings = {}
 
 def titleize_name(name):
     """Returns the titleized restaurant name.
 
     Example:
-        titleized_name('the good restaurant')
+        titleize_name('the good restaurant')
         >>> 'The Good Restaurant'
     """
 
@@ -56,12 +57,11 @@ def get_ratings_from_user(ratings):
     restaurant = raw_input("Enter the name of the restaurant: ")
     rating = int(raw_input("Enter the rating of the restaurant: "))
 
-    restaurant = restaurant[0].upper() + restaurant[1:]
-    ratings[restaurant] = rating
+    ratings[titleize_name(restaurant)] = rating
 
 
 def prompt_user(ratings):
-    """ This runs the restaurant-ratings program."""
+    """This runs the restaurant-ratings program."""
 
     while True:
         print "Would you like to:"
@@ -95,6 +95,8 @@ def prompt_user(ratings):
 
 
 def update_random_restaurant(ratings):
+    """Update a random restaurant."""
+
     rand_restaurant = random.choice(ratings.keys())
     print "The random restaurant is: %s" % rand_restaurant
     rating = int(raw_input("Please enter a new rating: "))
@@ -103,6 +105,8 @@ def update_random_restaurant(ratings):
 
 
 def update_restaurant(ratings):
+    """Update a named restaurant."""
+
     restaurant = raw_input("Which restaurant would you like to update? ")
 
     if restaurant not in ratings:
@@ -110,7 +114,7 @@ def update_restaurant(ratings):
 
     rating = int(raw_input("Enter a new rating: "))
 
-    ratings[restaurant] = rating
+    ratings[titleize_name(restaurant)] = rating
 
 
 get_ratings_from_file(ratings)
